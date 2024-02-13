@@ -15,6 +15,7 @@ export default defineConfig({
       components: "/src/components",
       layouts: "/src/layouts",
       pages: "/src/pages",
+      store: "/src/store",
       types: "/src/types",
       ui: "/src/ui",
       utils: "/src/utils",

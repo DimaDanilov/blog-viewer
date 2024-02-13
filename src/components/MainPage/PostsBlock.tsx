@@ -1,19 +1,20 @@
 import styled from "styled-components";
 import { Post } from "./Post";
 import { PostsSearch } from "./PostsSearch";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { loadPosts } from "api/PostsApi";
 import { PostModel } from "types/Post";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "store/store";
+import { IRootState } from "store/reducers/rootReducer";
 
 export const PostsBlock = () => {
-  const [posts, setPosts] = useState<PostModel[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const posts = useSelector((state: IRootState) => state.post.posts);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const data = await loadPosts();
-      setPosts(data);
-    };
-    fetchPosts();
+    dispatch(loadPosts());
   }, []);
 
   return (
