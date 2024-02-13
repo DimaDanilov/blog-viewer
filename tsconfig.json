@@ -24,8 +24,12 @@
     "baseUrl": ".",
     "paths": {
       "public/*": ["public/*"],
-      "src/*": ["src/*"],
-      "pages/*": ["src/pages/*"]
+      "assets/*": ["src/assets/*"],
+      "components/*": ["src/components/*"],
+      "layouts/*": ["src/layouts/*"],
+      "pages/*": ["src/pages/*"],
+      "types/*": ["src/types/*"],
+      "ui/*": ["src/ui/*"]
     }
   },
   "include": ["src"],

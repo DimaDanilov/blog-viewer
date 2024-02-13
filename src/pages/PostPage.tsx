@@ -1,7 +1,9 @@
+import { PageLayout } from "layouts/PageLayout";
+
 export const PostPage = () => {
   return (
-    <div>
+    <PageLayout>
       <h1>Post Page</h1>
-    </div>
+    </PageLayout>
   );
 };
