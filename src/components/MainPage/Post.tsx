@@ -65,9 +65,7 @@ const InteractivityContainer = styled.div<InteractivityContainerProps>`
 `;
 
 const PostLink = styled.a`
-  color: black;
   border: 2px solid black;
-  text-decoration: none;
   padding: 10px 15px;
   border-radius: 60px;
   height: fit-content;
