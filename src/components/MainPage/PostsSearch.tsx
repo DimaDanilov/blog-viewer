@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import searchIcon from "assets/icons/search_icon.svg"; // Tell webpack this JS file uses this image
+import searchIcon from "assets/icons/search_icon.svg";
 
 export const PostsSearch = () => {
   return (

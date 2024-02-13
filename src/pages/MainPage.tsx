@@ -1,5 +1,4 @@
-import { PostsGrid } from "components/MainPage/PostsGrid";
-import { PostsSearch } from "components/MainPage/PostsSearch";
+import { PostsBlock } from "components/MainPage/PostsBlock";
 import { PageLayout } from "layouts/PageLayout";
 import { Paragraph } from "ui/Paragraph";
 import { Title } from "ui/Title";
@@ -14,8 +13,7 @@ export const MainPage = () => {
         Здесь мы делимся интересными кейсами из наших проектов, пишем про IT, а
         также переводим зарубежные статьи
       </Paragraph>
-      <PostsSearch />
-      <PostsGrid />
+      <PostsBlock />
     </PageLayout>
   );
 };

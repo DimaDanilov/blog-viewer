@@ -23,4 +23,8 @@ export const Title = ({ children, fontSize, textAlign }: TitleProps) => {
 const StyledTitle = styled.h1<StyledTitleProps>`
   font-size: ${(props) => props.$fontSize}px;
   text-align: ${(props) => props.$textAlign};
+  margin: 5px 0;
+  &:first-letter {
+    text-transform: uppercase;
+  }
 `;

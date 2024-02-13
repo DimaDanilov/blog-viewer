@@ -10,12 +10,14 @@ export default defineConfig({
   resolve: {
     alias: {
       public: "/public",
+      api: "/src/api",
       assets: "/src/assets",
       components: "/src/components",
       layouts: "/src/layouts",
       pages: "/src/pages",
       types: "/src/types",
       ui: "/src/ui",
+      utils: "/src/utils",
     },
   },
 });

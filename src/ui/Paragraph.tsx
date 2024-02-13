@@ -28,4 +28,8 @@ export const Paragraph = ({
 const StyledParagraph = styled.p<StyledParagraphProps>`
   font-size: ${(props) => props.$fontSize}px;
   text-align: ${(props) => props.$textAlign};
+  margin: 5px auto;
+  &:first-letter {
+    text-transform: uppercase;
+  }
 `;
