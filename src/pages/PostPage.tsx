@@ -7,12 +7,23 @@ import { Title } from "ui/Title";
 import { choosePostImage } from "utils/choosePostImage";
 import arrow_left_icon from "assets/icons/arrow_left_icon.svg";
 import { selectPostById } from "store/reducers/postReducer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { AppDispatch } from "store/store";
+import { loadPostById } from "api/PostsApi";
 
 export const PostPage = () => {
   const { id } = useParams();
   const post = useSelector(selectPostById(Number(id)));
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (!post && id) {
+      dispatch(loadPostById(id));
+      console.log("Find from DB");
+    }
+  }, []);
 
   return (
     <PageLayout>

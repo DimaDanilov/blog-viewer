@@ -1,5 +1,5 @@
 import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
-import { loadPosts } from "api/PostsApi";
+import { loadPosts, loadPostById } from "api/PostsApi";
 import { PostModel } from "types/Post";
 import { IRootState } from "./rootReducer";
 
@@ -19,10 +19,23 @@ const postSlice = createSlice({
     builder.addCase(
       loadPosts.fulfilled,
       (state, action: PayloadAction<PostModel[]>) => {
-        return {
-          ...state,
-          posts: action.payload,
-        };
+        // Filter new posts so they won't have dublicates from old state
+        const uniquePosts = action.payload.filter((newPost) =>
+          state.posts.every((existingPost) => existingPost.id !== newPost.id)
+        );
+        state.posts = [...state.posts, ...uniquePosts];
+      }
+    );
+    builder.addCase(
+      loadPostById.fulfilled,
+      (state, action: PayloadAction<PostModel>) => {
+        // If post doesn't exist then add him to store
+        const isPostExists = state.posts.some(
+          (post) => post.id === action.payload.id
+        );
+        if (!isPostExists) {
+          state.posts.push(action.payload);
+        }
       }
     );
   },

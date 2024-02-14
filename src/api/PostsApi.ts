@@ -7,7 +7,10 @@ export const loadPosts = createAsyncThunk("post/loadPosts", async () => {
   return response.data;
 });
 
-export const loadPostById = createAsyncThunk("post/loadPostById", async () => {
-  const response = await axiosBase.get<PostModel>(`post`);
-  return response.data;
-});
+export const loadPostById = createAsyncThunk(
+  "post/loadPostById",
+  async (id: string) => {
+    const response = await axiosBase.get<PostModel>(`posts/${id}`);
+    return response.data;
+  }
+);
