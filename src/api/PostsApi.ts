@@ -7,6 +7,18 @@ export const loadPosts = createAsyncThunk("post/loadPosts", async () => {
   return response.data;
 });
 
+export const findPostsByQuery = createAsyncThunk(
+  "post/findPostsByQuery",
+  async (search: string) => {
+    const response = await axiosBase.get<PostModel[]>(`posts`, {
+      params: {
+        title: search.toLowerCase() || undefined,
+      },
+    });
+    return response.data;
+  }
+);
+
 export const loadPostById = createAsyncThunk(
   "post/loadPostById",
   async (id: string) => {

@@ -1,11 +1,29 @@
 import styled from "styled-components";
 import searchIcon from "assets/icons/search_icon.svg";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "store/store";
+import { findPostsByQuery } from "api/PostsApi";
 
 export const PostsSearch = () => {
+  const [search, setSearch] = useState<string>("");
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(findPostsByQuery(search));
+  }, [search]);
+
   return (
     <Container>
       <Icon src={searchIcon} alt="" />
-      <StyledInput type="text" placeholder="Поиск по названию статьи" />
+      <StyledInput
+        value={search}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setSearch(e.target.value)
+        }
+        type="text"
+        placeholder="Поиск по названию статьи"
+      />
     </Container>
   );
 };

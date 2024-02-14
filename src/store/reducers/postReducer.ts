@@ -1,14 +1,16 @@
 import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
-import { loadPosts, loadPostById } from "api/PostsApi";
+import { loadPosts, loadPostById, findPostsByQuery } from "api/PostsApi";
 import { PostModel } from "types/Post";
 import { IRootState } from "./rootReducer";
 
 interface PostState {
   posts: PostModel[];
+  filteredIds: number[];
 }
 
 const initialState: PostState = {
   posts: [],
+  filteredIds: [],
 };
 
 const postSlice = createSlice({
@@ -24,6 +26,12 @@ const postSlice = createSlice({
           state.posts.every((existingPost) => existingPost.id !== newPost.id)
         );
         state.posts = [...state.posts, ...uniquePosts];
+      }
+    );
+    builder.addCase(
+      findPostsByQuery.fulfilled,
+      (state, action: PayloadAction<PostModel[]>) => {
+        state.filteredIds = action.payload.map((post) => post.id);
       }
     );
     builder.addCase(
@@ -45,6 +53,15 @@ export const selectPostById = (id: number) =>
   createSelector(
     (state: IRootState) => state.post.posts,
     (posts) => posts && posts.find((post: PostModel) => post.id === id)
+  );
+
+export const selectFilteredPosts = () =>
+  createSelector(
+    (state: IRootState) => state.post.posts,
+    (state: IRootState) => state.post.filteredIds,
+    (posts, filteredIds) => {
+      return posts.filter((post) => filteredIds.includes(post.id));
+    }
   );
 
 export default postSlice.reducer;

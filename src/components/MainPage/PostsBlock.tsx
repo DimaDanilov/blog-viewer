@@ -6,23 +6,24 @@ import { loadPosts } from "api/PostsApi";
 import { PostModel } from "types/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "store/store";
-import { IRootState } from "store/reducers/rootReducer";
+import { selectFilteredPosts } from "store/reducers/postReducer";
 
 export const PostsBlock = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const posts = useSelector((state: IRootState) => state.post.posts);
+  const posts = useSelector(selectFilteredPosts());
 
   useEffect(() => {
-    dispatch(loadPosts());
+    if (posts.length === 0) {
+      dispatch(loadPosts());
+    }
   }, []);
 
   return (
     <PostBlockContainer>
       <PostsSearch />
       <GridContainer>
-        {posts.map((post: PostModel) => (
-          <Post key={post.id} post={post} isFirst={post.id === 1} />
+        {posts.map((post: PostModel, index) => (
+          <Post key={post.id} post={post} isFirst={index === 0} />
         ))}
       </GridContainer>
     </PostBlockContainer>
