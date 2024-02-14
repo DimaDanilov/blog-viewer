@@ -6,35 +6,32 @@ import { Paragraph } from "ui/Paragraph";
 import { Title } from "ui/Title";
 import { choosePostImage } from "utils/choosePostImage";
 import arrow_left_icon from "assets/icons/arrow_left_icon.svg";
+import { selectPostById } from "store/reducers/postReducer";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export const PostPage = () => {
   const { id } = useParams();
+  const post = useSelector(selectPostById(Number(id)));
 
   return (
     <PageLayout>
       <NavigationContainer>
-        <LinkWithImage href="/">
+        <LinkWithImage to="/">
           <img src={arrow_left_icon} alt="<-" width={30} />
           Вернуться к статьям
         </LinkWithImage>
         <ReactionsBlock />
       </NavigationContainer>
-      <PostContainer>
-        <Title>Что нужно знать об эффективной интернет-рекламе?</Title>
-        <PostInfo>
-          {id && <PostImage src={choosePostImage(Number(id))} alt="" />}
-          <Paragraph>
-            Интернет - огромный ресурс, позволяющий продвигать свои услуги
-            практически на любую аудиторию. Ежедневно в сеть выходит более 5
-            миллиардов людей - каждый из них может увидеть вашу рекламу и стать
-            вашим потенциальным клиентом. Даже небольшого процента этой
-            аудитории будет достаточно для эффективного продвижения ваших услуг.
-            Это огромное преимущество интернета перед другими каналами
-            коммуникации. И в этом же заключается его главный недостаток -
-            переизбыток информации и высокая конкуренция.
-          </Paragraph>
-        </PostInfo>
-      </PostContainer>
+      {post && (
+        <PostContainer>
+          <Title>{post.title}</Title>
+          <PostInfo>
+            <PostImage src={choosePostImage(Number(id))} alt="" />
+            <Paragraph>{post.body}</Paragraph>
+          </PostInfo>
+        </PostContainer>
+      )}
     </PageLayout>
   );
 };
@@ -45,7 +42,7 @@ const NavigationContainer = styled.div`
   justify-content: space-between;
 `;
 
-const LinkWithImage = styled.a`
+const LinkWithImage = styled(Link)`
   display: flex;
   flex-direction: row;
   gap: 5px;

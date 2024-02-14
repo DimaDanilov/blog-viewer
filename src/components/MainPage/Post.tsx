@@ -4,6 +4,7 @@ import { Title } from "ui/Title";
 import { Paragraph } from "ui/Paragraph";
 import { choosePostImage } from "utils/choosePostImage";
 import { ReactionsBlock } from "components/common/ReactionsBlock";
+import { Link } from "react-router-dom";
 
 type PostProps = { post: PostModel; isFirst: boolean };
 type InteractivityContainerProps = {
@@ -13,9 +14,9 @@ type InteractivityContainerProps = {
 export const Post = ({ post, isFirst }: PostProps) => {
   return (
     <PostContainer>
-      <a href={`post/${post.id}`}>
+      <Link to={`post/${post.id}`}>
         <PostImage src={choosePostImage(post.id)} alt="" />
-      </a>
+      </Link>
       <PostInfo>
         <TitleContainer>
           <Title fontSize={28}>{post.title}</Title>
@@ -25,7 +26,7 @@ export const Post = ({ post, isFirst }: PostProps) => {
       </PostInfo>
       <InteractivityContainer $isFirst={isFirst}>
         {!isFirst && <ReactionsBlock />}
-        <PostLink href={`post/${post.id}`}>Читать далее</PostLink>
+        <PostLink to={`post/${post.id}`}>Читать далее</PostLink>
       </InteractivityContainer>
     </PostContainer>
   );
@@ -65,7 +66,7 @@ const InteractivityContainer = styled.div<InteractivityContainerProps>`
   margin-top: auto; // Make this block attach to bottom
 `;
 
-const PostLink = styled.a`
+const PostLink = styled(Link)`
   border: 2px solid black;
   padding: 10px 15px;
   border-radius: 60px;
