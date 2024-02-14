@@ -3,18 +3,31 @@ import { Paragraph } from "ui/Paragraph";
 import { PostModel } from "types/Post";
 import { LikeIcon } from "assets/icons/LikeIcon";
 import { DislikeIcon } from "assets/icons/DislikeIcon";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "store/store";
+import { dislikePost, likePost } from "store/reducers/postReducer";
 
-type ReactionBlockProps = Pick<PostModel, "likes" | "dislikes">;
+type ReactionBlockProps = Pick<PostModel, "id" | "likes" | "dislikes">;
 
-export const ReactionsBlock = ({ likes, dislikes }: ReactionBlockProps) => {
+export const ReactionsBlock = ({ id, likes, dislikes }: ReactionBlockProps) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleLikeClick = () => {
+    dispatch(likePost(id));
+  };
+
+  const handleDislikeClick = () => {
+    dispatch(dislikePost(id));
+  };
+
   return (
     <ReactionsContainer>
-      <Reaction>
+      <Reaction onClick={handleLikeClick}>
         <LikeIcon color={likes.userLike ? "green" : "#959298"} />
         <Paragraph>{likes.amount}</Paragraph>
       </Reaction>
-      <Reaction>
-        <DislikeIcon color={likes.userLike ? "red" : "#959298"} />
+      <Reaction onClick={handleDislikeClick}>
+        <DislikeIcon color={dislikes.userDislike ? "red" : "#959298"} />
         <Paragraph>{dislikes.amount}</Paragraph>
       </Reaction>
     </ReactionsContainer>
@@ -33,4 +46,5 @@ const Reaction = styled.div`
   flex-direction: row;
   gap: 5px;
   align-items: center;
+  cursor: pointer;
 `;

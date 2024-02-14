@@ -31,7 +31,13 @@ export const PostPage = () => {
           <img src={arrow_left_icon} alt="<-" width={30} />
           Вернуться к статьям
         </LinkWithImage>
-        {post && <ReactionsBlock likes={post.likes} dislikes={post.dislikes} />}
+        {post && (
+          <ReactionsBlock
+            id={post.id}
+            likes={post.likes}
+            dislikes={post.dislikes}
+          />
+        )}
       </NavigationContainer>
       {post && (
         <PostContainer>

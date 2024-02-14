@@ -16,7 +16,34 @@ const initialState: PostState = {
 const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {},
+  reducers: {
+    likePost(state, action: PayloadAction<number>) {
+      const postId = action.payload;
+      const postIndex = state.posts.findIndex((post) => post.id === postId);
+      if (postIndex !== -1) {
+        state.posts[postIndex].likes.userLike =
+          !state.posts[postIndex].likes.userLike;
+        if (state.posts[postIndex].likes.userLike) {
+          state.posts[postIndex].likes.amount++;
+        } else {
+          state.posts[postIndex].likes.amount--;
+        }
+      }
+    },
+    dislikePost(state, action: PayloadAction<number>) {
+      const postId = action.payload;
+      const postIndex = state.posts.findIndex((post) => post.id === postId);
+      if (postIndex !== -1) {
+        state.posts[postIndex].dislikes.userDislike =
+          !state.posts[postIndex].dislikes.userDislike;
+        if (state.posts[postIndex].dislikes.userDislike) {
+          state.posts[postIndex].dislikes.amount++;
+        } else {
+          state.posts[postIndex].dislikes.amount--;
+        }
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       loadPosts.fulfilled,
@@ -63,5 +90,7 @@ export const selectFilteredPosts = () =>
       return posts.filter((post) => filteredIds.includes(post.id));
     }
   );
+
+export const { likePost, dislikePost } = postSlice.actions;
 
 export default postSlice.reducer;
