@@ -38,7 +38,10 @@ const PostBlockContainer = styled.div`
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
   gap: 20px;
   > * {
     &:first-child {

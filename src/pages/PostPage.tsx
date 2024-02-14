@@ -54,7 +54,12 @@ export const PostPage = () => {
 
 const NavigationContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 10px;
+  @media (min-width: 425px) {
+    flex-direction: row;
+    gap: 0;
+  }
   justify-content: space-between;
 `;
 
