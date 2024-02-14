@@ -23,6 +23,10 @@ const postSlice = createSlice({
       if (postIndex !== -1) {
         state.posts[postIndex].likes.userLike =
           !state.posts[postIndex].likes.userLike;
+        if (state.posts[postIndex].dislikes.userDislike) {
+          state.posts[postIndex].dislikes.amount--;
+          state.posts[postIndex].dislikes.userDislike = false;
+        }
         if (state.posts[postIndex].likes.userLike) {
           state.posts[postIndex].likes.amount++;
         } else {
@@ -36,6 +40,10 @@ const postSlice = createSlice({
       if (postIndex !== -1) {
         state.posts[postIndex].dislikes.userDislike =
           !state.posts[postIndex].dislikes.userDislike;
+        if (state.posts[postIndex].likes.userLike) {
+          state.posts[postIndex].likes.amount--;
+          state.posts[postIndex].likes.userLike = false;
+        }
         if (state.posts[postIndex].dislikes.userDislike) {
           state.posts[postIndex].dislikes.amount++;
         } else {
