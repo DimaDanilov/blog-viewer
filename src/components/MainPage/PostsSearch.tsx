@@ -3,7 +3,7 @@ import searchIcon from "assets/icons/search_icon.svg";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store/store";
-import { findPostsByQuery } from "api/PostsApi";
+import { findPostsByQuery } from "api/PostApi";
 
 export const PostsSearch = () => {
   const [search, setSearch] = useState<string>("");

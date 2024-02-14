@@ -1,18 +1,21 @@
 import styled from "styled-components";
-import likeIcon from "assets/icons/like_icon.svg";
-import dislikeIcon from "assets/icons/dislike_icon.svg";
 import { Paragraph } from "ui/Paragraph";
+import { PostModel } from "types/Post";
+import { LikeIcon } from "assets/icons/LikeIcon";
+import { DislikeIcon } from "assets/icons/DislikeIcon";
 
-export const ReactionsBlock = () => {
+type ReactionBlockProps = Pick<PostModel, "likes" | "dislikes">;
+
+export const ReactionsBlock = ({ likes, dislikes }: ReactionBlockProps) => {
   return (
     <ReactionsContainer>
       <Reaction>
-        <img src={likeIcon} alt="Like" />
-        <Paragraph>10</Paragraph>
+        <LikeIcon color={likes.userLike ? "green" : "#959298"} />
+        <Paragraph>{likes.amount}</Paragraph>
       </Reaction>
       <Reaction>
-        <img src={dislikeIcon} alt="Dislike" />
-        <Paragraph>15</Paragraph>
+        <DislikeIcon color={likes.userLike ? "red" : "#959298"} />
+        <Paragraph>{dislikes.amount}</Paragraph>
       </Reaction>
     </ReactionsContainer>
   );
@@ -29,4 +32,5 @@ const Reaction = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
+  align-items: center;
 `;

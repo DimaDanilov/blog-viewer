@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 type ParagraphProps = {
-  children: string;
+  children: number | string;
   fontSize?: number;
   textAlign?: "start" | "end" | "center";
 };

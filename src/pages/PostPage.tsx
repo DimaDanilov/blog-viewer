@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { AppDispatch } from "store/store";
-import { loadPostById } from "api/PostsApi";
+import { loadPostById } from "api/PostApi";
 
 export const PostPage = () => {
   const { id } = useParams();
@@ -21,7 +21,6 @@ export const PostPage = () => {
   useEffect(() => {
     if (!post && id) {
       dispatch(loadPostById(id));
-      console.log("Find from DB");
     }
   }, []);
 
@@ -32,7 +31,7 @@ export const PostPage = () => {
           <img src={arrow_left_icon} alt="<-" width={30} />
           Вернуться к статьям
         </LinkWithImage>
-        <ReactionsBlock />
+        {post && <ReactionsBlock likes={post.likes} dislikes={post.dislikes} />}
       </NavigationContainer>
       {post && (
         <PostContainer>

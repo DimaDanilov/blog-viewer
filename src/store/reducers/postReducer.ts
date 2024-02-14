@@ -1,5 +1,5 @@
 import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
-import { loadPosts, loadPostById, findPostsByQuery } from "api/PostsApi";
+import { loadPosts, loadPostById, findPostsByQuery } from "api/PostApi";
 import { PostModel } from "types/Post";
 import { IRootState } from "./rootReducer";
 

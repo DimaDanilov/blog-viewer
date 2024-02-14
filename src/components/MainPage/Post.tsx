@@ -20,12 +20,16 @@ export const Post = ({ post, isFirst }: PostProps) => {
       <PostInfo>
         <TitleContainer>
           <Title fontSize={28}>{post.title}</Title>
-          {isFirst && <ReactionsBlock />}
+          {isFirst && (
+            <ReactionsBlock likes={post.likes} dislikes={post.dislikes} />
+          )}
         </TitleContainer>
         {isFirst && <Paragraph>{post.body}</Paragraph>}
       </PostInfo>
       <InteractivityContainer $isFirst={isFirst}>
-        {!isFirst && <ReactionsBlock />}
+        {!isFirst && (
+          <ReactionsBlock likes={post.likes} dislikes={post.dislikes} />
+        )}
         <PostLink to={`post/${post.id}`}>Читать далее</PostLink>
       </InteractivityContainer>
     </PostContainer>

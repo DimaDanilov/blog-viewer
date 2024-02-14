@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Post } from "./Post";
 import { PostsSearch } from "./PostsSearch";
 import { useEffect } from "react";
-import { loadPosts } from "api/PostsApi";
+import { loadPosts } from "api/PostApi";
 import { PostModel } from "types/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "store/store";
