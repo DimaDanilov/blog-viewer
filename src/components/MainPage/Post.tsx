@@ -5,13 +5,14 @@ import { Paragraph } from "ui/Paragraph";
 import { choosePostImage } from "utils/choosePostImage";
 import { ReactionsBlock } from "components/common/ReactionsBlock";
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
 type PostProps = { post: PostModel; isFirst: boolean };
 type InteractivityContainerProps = {
   $isFirst: PostProps["isFirst"];
 };
 
-export const Post = ({ post, isFirst }: PostProps) => {
+export const Post = memo(({ post, isFirst }: PostProps) => {
   return (
     <PostContainer>
       <Link to={`post/${post.id}`}>
@@ -42,7 +43,7 @@ export const Post = ({ post, isFirst }: PostProps) => {
       </InteractivityContainer>
     </PostContainer>
   );
-};
+});
 
 const PostContainer = styled.div`
   display: flex;
